@@ -56,6 +56,19 @@ app.post('/data', (req, res) => {
   });
 });
 
+app.get("/vivek", (req, res) => {
+    const vivek = {
+        name: "Vivek Kumar Singh",
+        age: 18,
+        complexion: "brown",
+        cgpa: 5.92
+    };
+
+    res.status(200).json({
+        vivek,
+        message: "Info fetched successfully"
+    });
+});
 /**
  * GET /error-test
  * Endpoint to demonstrate environment-specific error detail
