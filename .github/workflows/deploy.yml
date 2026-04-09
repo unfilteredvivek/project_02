@@ -7,16 +7,16 @@ on:
       - main
 
 jobs:
-deploy:
-  runs-on: ubuntu-latest
-  steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Print branch name
+      - name: Print branch name
         run: echo "Deploying branch $GITHUB_REF"
 
-    - name: Set environment
+      - name: Set environment
         run: |
           if [[ "${GITHUB_REF}" == "refs/heads/dev" ]]; then
             echo "ENV=development" >> $GITHUB_ENV
@@ -26,5 +26,5 @@ deploy:
             echo "ENV=production" >> $GITHUB_ENV
           fi
 
-    - name: Show environment
+      - name: Show environment
         run: echo "Environment is $ENV"
