@@ -1,4 +1,4 @@
-import express from 'express';
+const express = require('express');
 import dotenv from 'dotenv';
 
 
@@ -86,7 +86,7 @@ app.get('/error-test', (req, res) => {
 });
 
 // 3. Start Server
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0"() => {
   console.log(`-----------------------------------------`);
   console.log(`🚀 Server running in [${env.toUpperCase()}] mode`);
   console.log(`📡 Listening on http://localhost:${PORT}`);
