@@ -26,5 +26,8 @@ jobs:
             echo "ENV=production" >> $GITHUB_ENV
           fi
 
+      - name: Build Docker image
+        run: docker build -t myapp:${{ github.ref_name }} .
+
       - name: Show environment
         run: echo "Environment is $ENV"
