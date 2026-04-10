@@ -1,5 +1,5 @@
 const express = require('express');
-import dotenv from 'dotenv';
+const dotenv = require('dotenv');
 
 
 dotenv.config();
@@ -68,7 +68,7 @@ app.get("/vivek", (req, res) => {
         vivek,
         message: "Info fetched successfully"
     });
-});git
+});
 /**
  * GET /error-test
  * Endpoint to demonstrate environment-specific error detail
