@@ -24,7 +24,15 @@ jobs:
       - name: Push Docker Image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/myapp:${{ github.sha }}
 
-      # 🔥 DEPLOY ON EC2
+      - name: Debug EC2 Key
+        run: |
+          if [ -z "${{ secrets.EC2_KEY }}" ]; then
+            echo "❌ KEY IS EMPTY"
+          else
+           echo "✅ KEY IS PRESENT"
+          fi
+    
+    # 🔥 DEPLOY ON EC2
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v0.1.6
         with:
