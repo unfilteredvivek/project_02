@@ -4,7 +4,7 @@ const app = express();
 const PORT = 3000;
 
 app.get('/', (req, res) => {
-  res.send('🚀 App updated from CI/CD Pipeline');
+  res.send('🚀 BROKEN VERSION');
 });
 
 app.get('/health', (req, res) => {
