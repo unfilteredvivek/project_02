@@ -1,11 +1,29 @@
-- name: Build Image
-  run: docker build -t ${{ secrets.DOCKER_USERNAME }}/myapp:${{ github.sha }} .
+name: Versioned Build and Push
 
-- name: Tag latest
-  run: docker tag ${{ secrets.DOCKER_USERNAME }}/myapp:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/myapp:latest
+on:
+  push:
+    branches:
+      - dev
 
-- name: Push Version Tag
-  run: docker push ${{ secrets.DOCKER_USERNAME }}/myapp:${{ github.sha }}
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-- name: Push Latest Tag
-  run: docker push ${{ secrets.DOCKER_USERNAME }}/myapp:latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Login to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Build Image
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/myapp:${{ github.sha }} .
+
+      - name: Tag Latest
+        run: docker tag ${{ secrets.DOCKER_USERNAME }}/myapp:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/myapp:latest
+
+      - name: Push Version Tag
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/myapp:${{ github.sha }}
+
+      - name: Push Latest Tag
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/myapp:latest
